@@ -20,16 +20,17 @@ from imblearn.over_sampling import SMOTE
 from flask import render_template, request
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
-
+import os
 
 
 app = Flask(__name__)
 
 # Configuration de la base de données
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:ahmed@localhost:5432/DatabaseLCU'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://postgres:ahmed@localhost:5432/DatabaseLCU')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
 
 class GreenSpace(db.Model):
     __tablename__ = 'databaselcu'
