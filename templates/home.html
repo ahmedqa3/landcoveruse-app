@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil - Application LCU</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
+    <style>
+        /* Couleurs du thème */
+        :root {
+            --hcp-yellow: #FFFACD; /* Jaune pâle */
+            --hcp-purple: #4B0082; /* Mauve foncé */
+        }
+
+        /* Styles généraux */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--hcp-purple);
+            color: var(--hcp-yellow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* En-tête avec logos */
+        header {
+            background-color: var(--hcp-yellow);
+            color: var(--hcp-purple);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header img {
+            height: 70px;
+        }
+
+        /* Texte ENSIAS */
+        .ensias-text {
+            color: red;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* Conteneur pour le logo et le texte ENSIAS */
+        .ensias-container {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Titre principal centré avec la police Roboto Slab */
+        .main-title {
+            text-align: center;
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 40px 0;
+            color: var(--hcp-yellow);
+        }
+
+        /* Section principale avec des choix */
+        .section {
+            background-color: var(--hcp-yellow);
+            width: 80%;
+            padding: 30px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            color: var(--hcp-purple);
+        }
+
+        /* Conteneur des options aligné en ligne */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Carte individuelle */
+        .card {
+            background-color: var(--hcp-purple);
+            color: var(--hcp-yellow);
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 1;
+            max-width: 250px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background-color: var(--hcp-yellow);
+            color: var(--hcp-purple);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--hcp-purple);
+            color: var(--hcp-yellow);
+        }
+
+        /* Pied de page */
+        footer {
+            background-color: var(--hcp-yellow);
+            color: var(--hcp-purple);
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- En-tête -->
+    <header>
+        <img src="{{ url_for('static', filename='hcp.png') }}" alt="Logo HCP">
+        <div class="ensias-container">
+            <img src="{{ url_for('static', filename='ensias.png') }}" alt="Logo ENSIAS">
+        </div>
+    </header>
+
+    <!-- Titre principal centré -->
+    <div class="main-title">
+        Exploitation des données Land Cover & Land Use pour le Maroc
+    </div>
+
+    <!-- Section principale avec des choix -->
+    <section class="section">
+        <div class="card-container">
+            <!-- Cartes pour chaque rubrique -->
+            <div class="card">
+                <div class="icon">📄</div>
+                <h2 class="card-title">Présentation du Projet</h2>
+                <a href="{{ url_for('accueil') }}" class="btn">Voir la présentation</a>
+            </div>
+            <div class="card">
+                <div class="icon">🗺️</div>
+                <h2 class="card-title">Carte Interactive</h2>
+                <a href="{{ url_for('visualiser') }}" class="btn">Voir la carte</a>
+            </div>
+            <div class="card">
+                <div class="icon">📊</div>
+                <h2 class="card-title">Exploratory Data Analysis</h2>
+                <a href="{{ url_for('eda') }}" class="btn">Analyser les données</a>
+            </div>
+            <div class="card">
+                <div class="icon">🔍</div>
+                <h2 class="card-title">Modèles de Prédiction</h2>
+                <a href="{{ url_for('pred') }}" class="btn">Voir les modèles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        © 2024 - Ahmed QAIS - Stage HCP
+    </footer>
+
+</body>
+</html>

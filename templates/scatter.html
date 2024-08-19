@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Scatter Plot - Sélection des Variables</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f3e7; /* Jaune pâle */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #5a2a8a; /* Mauve foncé */
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #5a2a8a; /* Mauve foncé */
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #5a2a8a; /* Mauve foncé */
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            background-color: #ffffff;
+            color: #5a2a8a; /* Mauve foncé */
+            cursor: pointer;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f9c900; /* Jaune */
+            color: #5a2a8a; /* Mauve foncé */
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e6b800; /* Jaune plus foncé */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scatter Plot: Sélection des Variables</h1>
+        <form action="{{ url_for('scatter_plot') }}" method="POST">
+            <h2>Choisissez les variables pour le Scatter Plot</h2>
+
+            <label for="x_variable">Variable X :</label>
+            <select name="x_variable" id="x_variable">
+                {% for var in available_vars %}
+                    <option value="{{ var }}">{{ var.replace('_', ' ').title() }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="y_variable">Variable Y :</label>
+            <select name="y_variable" id="y_variable">
+                {% for var in available_vars %}
+                    <option value="{{ var }}">{{ var.replace('_', ' ').title() }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Afficher le Scatter Plot</button>
+        </form>
+    </div>
+</body>
+</html>

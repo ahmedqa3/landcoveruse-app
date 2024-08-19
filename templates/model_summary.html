@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé du Modèle</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .model-description {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        .model-description h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .model-description p {
+            line-height: 1.8;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .btn-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .icon-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .icon-container i {
+            font-size: 60px;
+            color: #007bff;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .card img {
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+        }
+        .card-body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Résumé du Modèle</h1>
+
+        <!-- Icon Container -->
+        <div class="icon-container">
+            {% if route == 'pred_tree_cover_change_detection' %}
+                <i class="fas fa-tree"></i>
+            {% elif route == 'pred_vegetation_density_estimation' %}
+                <i class="fas fa-leaf"></i>
+            {% elif route == 'pred_land_cover_topography_analysis' %}
+                <i class="fas fa-map"></i>
+            {% elif route == 'pred_tree_cover_change' %}
+                <i class="fas fa-exchange-alt"></i>
+            {% endif %}
+        </div>
+
+        <div class="model-description">
+            {% if route == 'pred_tree_cover_change_detection' %}
+                <h2>Détection du Changement de Couverture Arborée</h2>
+                <p>
+                    Ce modèle utilise un classificateur basé sur le Gradient Boosting pour détecter les changements dans la couverture arborée en fonction des caractéristiques topographiques telles que l'altitude, la pente (pente moyenne), et l'exposition (exposition moyenne). Le Gradient Boosting est un algorithme d'apprentissage supervisé qui améliore la précision des prédictions en combinant plusieurs modèles faibles pour créer un modèle puissant.
+                </p>
+                <p>
+                    L'objectif principal de ce modèle est d'identifier les zones où la couverture arborée a changé. Cela peut être crucial pour des études sur la déforestation, la reforestation, et la gestion des ressources forestières. Il aide également à comprendre comment les facteurs topographiques influencent ces changements et à cibler des interventions spécifiques pour la conservation.
+                </p>
+                <p>
+                    <strong>Utilisation :</strong> Le modèle est utilisé pour analyser les changements dans la couverture arborée à partir de données topographiques. Il peut être appliqué pour surveiller les zones touchées par des changements environnementaux ou pour évaluer l'efficacité des programmes de reforestation.
+                </p>
+            {% elif route == 'pred_vegetation_density_estimation' %}
+                <h2>Estimation de la Densité Végétale</h2>
+                <p>
+                    Ce modèle utilise la régression linéaire pour estimer la densité végétale en fonction des variables topographiques telles que l'altitude, la pente, et l'exposition. La régression linéaire est une technique statistique qui modélise la relation entre une variable dépendante continue et une ou plusieurs variables indépendantes.
+                </p>
+                <p>
+                    L'objectif de ce modèle est de fournir une estimation précise de la densité végétale dans différentes régions en utilisant les données topographiques disponibles. Cette estimation peut être utilisée pour évaluer la santé des écosystèmes, pour planifier des initiatives de conservation, ou pour surveiller les changements dans la couverture végétale au fil du temps.
+                </p>
+                <p>
+                    <strong>Utilisation :</strong> Ce modèle permet d'estimer la densité végétale, ce qui est utile pour les études environnementales et la gestion des ressources naturelles. Les résultats peuvent guider les efforts de conservation et aider à planifier des interventions adaptées.
+                </p>
+            {% elif route == 'pred_land_cover_topography_analysis' %}
+                <h2>Analyse des Corrélations entre Couverture du Sol et Topographie</h2>
+                <p>
+                    Ce modèle analyse les relations entre la couverture du sol et les caractéristiques topographiques en utilisant la régression linéaire. Les variables étudiées sont l'altitude moyenne, la pente moyenne, et l'exposition moyenne. Cette analyse vise à comprendre comment les facteurs topographiques influencent la répartition des différentes classes de couverture du sol.
+                </p>
+                <p>
+                    En utilisant ce modèle, on peut identifier les patterns de couverture du sol en fonction des variables topographiques et explorer les relations entre différents types de couverture du sol. Cette analyse peut être utile pour des applications en gestion des ressources naturelles, en planification urbaine et en évaluation de l'impact environnemental.
+                </p>
+                <p>
+                    <strong>Utilisation :</strong> L'analyse aide à comprendre les interactions entre la couverture du sol et la topographie, ce qui peut influencer les décisions de gestion environnementale et les politiques de conservation.
+                </p>
+            {% elif route == 'pred_tree_cover_change' %}
+                <h2>Prédictions de Changement de Couverture Végétale</h2>
+                <p>
+                    Ce modèle utilise la régression logistique pour prédire les changements dans la couverture végétale en se basant sur les caractéristiques d'altitude et d'exposition. La régression logistique est un modèle de classification utilisé pour prédire la probabilité d'un événement binaire en fonction des variables explicatives.
+                </p>
+                <p>
+                    L'objectif est de prévoir les changements dans la couverture végétale, notamment la perte ou le gain de couverture arborée, ainsi que les changements associés aux zones humides. Cette prédiction est essentielle pour la gestion des ressources naturelles, la planification de la conservation, et l'évaluation des impacts des changements climatiques.
+                </p>
+                <p>
+                    <strong>Utilisation :</strong> Le modèle est utilisé pour prédire les changements dans la couverture végétale, ce qui est crucial pour surveiller les effets des changements environnementaux et orienter les efforts de conservation.
+                </p>
+            {% endif %}
+        </div>
+
+        <div class="btn-container">
+            <form method="POST">
+                <button type="submit" class="btn btn-primary">Exécuter le Modèle</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

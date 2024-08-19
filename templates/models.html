@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modèles de Prédiction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            background-color: #ffffff; /* Conserve le fond blanc pour la lisibilité */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px; /* Ajouté pour espacer du header */
+        }
+
+        header {
+            background: #4b0082; /* Mauve foncé */
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid #f3e5ab; /* Jaune pâle */
+        }
+
+        header h1 {
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 35px;
+            letter-spacing: 2px;
+            color: #ffffff; /* Couleur du texte du titre */
+        }
+
+        h2 {
+            color: #4b0082; /* Mauve foncé pour les sous-titres */
+            font-size: 2em;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #f3e5ab; /* Jaune pâle pour la bordure */
+            padding-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: #f3e5ab; /* Jaune pâle pour le fond des liens */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .links li {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            padding: 15px;
+            background: #ffffff; /* Fond blanc pour les éléments de liste */
+            border-left: #4b0082 5px solid; /* Mauve foncé pour la bordure gauche */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .links a {
+            color: #4b0082; /* Mauve foncé pour les liens */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #3d007d; /* Couleur plus foncée pour l'état survolé */
+            text-decoration: underline;
+        }
+
+        .btn-back {
+            background-color: #4b0082; /* Mauve foncé */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn-back:hover {
+            background-color: #3d007d; /* Couleur plus foncée pour l'état survolé */
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            header {
+                padding: 20px 0;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .links li {
+                font-size: 1.1em;
+            }
+
+            .btn-back {
+                font-size: 0.9em;
+                padding: 8px 16px;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Modèles de Prédiction</h1>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Choisissez un modèle de prédiction :</h2>
+            <ul class="links">
+                <li><a href="/pred/tree_cover_change_detection">Détection du Changement de Couverture Arborée</a></li>
+                <li><a href="/pred/tree_cover_change">Prédiction de Gain ou Perte d'Arbres</a></li>
+                <li><a href="/pred/land_cover_topography_analysis">Analyse de la Couverture du Sol et de la Topographie</a></li>
+                <li><a href="/pred/vegetation_density_estimation">Estimation de la Densité Végétale</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <button class="btn-back" onclick="window.location.href='/'">Retour à l'accueil</button>
+</body>
+</html>

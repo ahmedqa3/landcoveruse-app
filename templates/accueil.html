@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation du Projet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #4b0082;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #f3e5ab 3px solid;
+            text-align: center;
+        }
+
+        header h1 {
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 35px;
+            letter-spacing: 2px;
+        }
+
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #4b0082;
+            font-size: 22px;
+            border-bottom: 2px solid #4b0082;
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+            padding: 15px;
+            background: #f3e5ab;
+            border-left: #4b0082 5px solid;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        ul li strong {
+            color: #4b0082;
+        }
+
+        .links {
+            margin: 20px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 10px;
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 5px;
+            background-color: #4b0082;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .links a:hover {
+            background-color: #3d007d;
+            transform: translateY(-3px);
+        }
+
+        .btn-back {
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1em;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .btn-back:hover {
+            background-color: #3d007d;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            header {
+                padding: 20px 0;
+            }
+
+            .links a {
+                margin: 5px 0;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Présentation du Projet</h1>
+        </header>
+
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                Notre application web dynamique est conçue pour exploiter et analyser les données de couverture et d'utilisation des sols au Maroc. Elle fournit une plateforme interactive pour visualiser et étudier les espaces verts, les zones forestières, ainsi que d'autres types de couverture du sol à l'aide de cartes interactives et de graphiques détaillés.
+            </p>
+            <p>
+                L'application utilise des techniques d'analyse spatiale et des outils de machine learning pour fournir des informations précieuses sur les changements de couverture du sol et les caractéristiques topographiques. Elle est spécialement développée pour les chercheurs, les urbanistes, et les décideurs souhaitant comprendre les dynamiques environnementales au Maroc.
+            </p>
+            <p>
+                En s'appuyant sur une architecture moderne, cette application garantit une expérience utilisateur fluide et efficace, même lors de la manipulation de grandes quantités de données. Les utilisateurs peuvent explorer les informations géospatiales de manière interactive, ce qui facilite la prise de décisions éclairées pour la gestion des ressources naturelles et l'aménagement du territoire.
+            </p>
+        </section>
+
+        <section>
+            <h2>Datasets Utilisés</h2>
+            <p>
+                Pour ce projet, deux principaux ensembles de données ont été utilisés :
+            </p>
+            <ul class="links">
+                <li>
+                    <strong>Global Land Cover and Land Use v1:</strong> Un ensemble de données global sur la couverture et l'utilisation des sols, accessible via la plateforme 
+                    <a href="https://glad.earthengine.app/view/global-land-cover-land-use-v1#lon=-95.21093630791385;lat=34.797485465829006;zoom=4" target="_blank">Global Land Cover and Land Use v1</a>.
+                </li>
+                <li>
+                    <strong>Modèle Numérique d'Élévation (DEM):</strong> Les données d'altitude ont été extraites de la plateforme 
+                    <a href="https://earthexplorer.usgs.gov/" target="_blank">Earth Explorer</a>, offrant des informations géospatiales cruciales pour l'analyse topographique.
+                </li>
+            </ul>
+            <p>
+                Ces données sont essentielles pour comprendre la répartition spatiale des types de couverture du sol et leur relation avec la topographie du pays.
+            </p>
+        </section>
+
+        <section>
+            <h2>Méthodologie</h2>
+            <p>
+                Le développement de l'application repose sur l'intégration de plusieurs technologies modernes, chacune ayant un rôle précis dans la réalisation des objectifs du projet :
+            </p>
+            <ul>
+                <li>
+                    <strong>QGIS & PostGIS:</strong> Ces outils sont essentiels pour le traitement et la gestion des données géospatiales. QGIS est utilisé pour la manipulation des données, tandis que PostGIS, une extension de PostgreSQL, est utilisé pour le stockage et la gestion efficace des données spatiales au sein d'une base de données relationnelle.
+                </li>
+                <li>
+                    <strong>Flask:</strong> Flask est un framework web en Python qui sert de fondation pour l'application. Il gère les requêtes HTTP, la logique métier, ainsi que la communication avec la base de données. Flask est également responsable du rendu des pages web et de la transmission des données à l'interface utilisateur.
+                </li>
+                <li>
+                    <strong>Folium & Leaflet:</strong> Ces bibliothèques permettent de générer des cartes interactives intégrées à l'application. Elles offrent aux utilisateurs une visualisation intuitive des données géospatiales, avec des fonctionnalités interactives telles que le zoom, les clics sur les éléments, et l'affichage d'informations détaillées.
+                </li>
+                <li>
+                    <strong>Machine Learning:</strong> Des algorithmes de machine learning sont appliqués pour prédire et analyser les changements dans la couverture du sol. Les modèles utilisent des caractéristiques telles que l'altitude, la pente, et l'exposition pour effectuer des prévisions et identifier des tendances dans les données.
+                </li>
+            </ul>
+            <p>
+                Cette combinaison d'outils permet une analyse approfondie et une visualisation efficace des données, facilitant ainsi une compréhension détaillée des dynamiques de couverture du sol au Maroc.
+            </p>
+        </section>
+
+        <section>
+            <h2>Fonctionnalités</h2>
+            <p>
+                L'application propose plusieurs fonctionnalités principales pour l'analyse et la visualisation des données :
+            </p>
+            <ul>
+                <li>
+                    <strong>Visualisation des Couvertures du Sol:</strong> Les utilisateurs peuvent explorer les différents types de couverture du sol à travers des cartes interactives, avec des options pour filtrer et zoomer sur des zones spécifiques. Elles incluent des informations sur l'altitude, la pente, et l'exposition, fournissant des contextes détaillés sur les caractéristiques topographiques pour chaque point.
+                </li>
+                <li>
+                    <strong>Clustering et Analyse des Données:</strong> Les algorithmes de clustering permettent de regrouper les données similaires et de réduire la complexité visuelle des cartes, facilitant ainsi une meilleure analyse.
+                </li>
+                <li>
+                    <strong>Prévisions et Modèles:</strong> Les fonctionnalités de machine learning permettent de prédire les changements futurs dans la couverture du sol et d'évaluer les impacts potentiels.
+                </li>
+            </ul>
+            <p>
+                Ces fonctionnalités sont conçues pour offrir aux utilisateurs une plateforme complète pour l'analyse des données géospatiales, avec des outils interactifs pour une exploration approfondie.
+            </p>
+        </section>
+
+        
+
+        <div class="links">
+            <button class="btn-back" onclick="window.location.href='/'">Retour à l'accueil</button>
+        </div>
+    </div>
+</body>
+
+</html>

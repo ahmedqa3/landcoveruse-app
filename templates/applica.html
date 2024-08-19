@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualisation des données</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.6.0/dist/MarkerCluster.Default.css"/>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Leaflet MarkerCluster JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.0/leaflet.markercluster.js"></script>
+    <style>
+        /* Général */
+ /* Général */
+ body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* En-tête */
+        h1 {
+            margin: 40px 0;
+            font-size: 2.5rem;
+            color: #642dac;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* Carte */
+        #map {
+            margin-bottom: 40px;
+            border: 2px solid #dee2e6;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Sélecteur de filtre */
+        #filter {
+            margin-bottom: 30px;
+        }
+
+        #filter label {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid #ced4da;
+            background-color: #ffffff;
+        }
+
+        /* Tableau */
+        .table {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            border-spacing: 0;
+        }
+
+        .table thead {
+            background-color: #4B0082; /* Mauve foncé pour l'en-tête */
+            color: #ffffff;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            padding: 12px;
+            font-size: 0.875rem; /* Taille de police modérée */
+        }
+
+        .table th {
+            font-weight: bold;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f8f9fa; /* Blanc cassé pour les lignes paires */
+        }
+
+        .table tbody tr:hover {
+            background-color: #e2e6ea; /* Couleur de survol */
+        }
+
+        /* Pagination */
+        #pagination {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .page-btn {
+            background-color: #dee2e6; /* Couleur claire pour les boutons */
+            color: #01050a; /* Couleur du texte du bouton */
+            border: 1px solid #183e66; /* Bordure pour les boutons */
+            padding: 8px 12px;
+            margin: 0 4px;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .page-btn:hover {
+            background-color: #e2e6ea; /* Couleur au survol */
+        }
+
+        .page-btn.active {
+            background-color: #4B0082; /* Mauve foncé pour le bouton actif */
+            color: #ffffff;
+            border-color: #007bff;
+        }
+
+        /* Page flottante */
+        .floating-panel {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 15px;
+            width: 300px; /* Largeur fixe pour la page flottante */
+            font-size: 0.875rem; /* Taille de police modérée */
+        }
+
+        .floating-panel table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .floating-panel table th,
+        .floating-panel table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .floating-panel table th {
+            background-color: #4B0082; /* Mauve foncé pour l'en-tête de la page flottante */
+            color: #ffffff;
+        }
+
+        /* Style des données dans les popups */
+        .leaflet-popup-content {
+            line-height: 1.6;
+        }
+
+        .leaflet-popup-content div {
+            margin-bottom: 10px;
+        }
+
+        .leaflet-popup-content b {
+            color: #161718;
+            font-size: 1rem;
+        }
+
+        .leaflet-popup-content span {
+            font-size: 1rem;
+            color: #0d080875;
+        }
+
+        /* Message de chargement */
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #020a13;
+            padding: 10px;
+        }
+
+        /* Espacements */
+        .spacing-large {
+            margin: 40px 0;
+        }
+
+        .spacing-medium {
+            margin: 30px 0;
+        }
+
+        .spacing-small {
+            margin: 20px 0;
+        }
+
+        .btn-back {
+    background-color: #4b0082; /* Mauve foncé */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-back:hover {
+    background-color: #3d007d; /* Couleur plus foncée pour l'état survolé */
+    transform: translateY(-3px);
+}
+
+
+    </style>
+</head>
+<body>
+    
+    <button class="btn-back" onclick="window.location.href='/'">Retour à l'accueil</button>
+
+
+    <h1 class="text-center">Carte Interactive</h1>
+
+    <div id="filter" class="container">
+        <label for="strata">Filtrer par Strata:</label>
+        <select id="strata" class="form-select">
+            <option value="all">Tous</option>
+            <option value="Dense short vegetation">Dense short vegetation</option>
+            <option value="Open tree cover">Open tree cover</option>
+            <option value="Dense tree cover">Dense tree cover</option>
+            <option value="Tree cover gain">Tree cover gain</option>
+            <option value="Tree cover loss, not fire">Tree cover loss, not fire</option>
+            <option value="Wetland sparse vegetation">Wetland sparse vegetation</option>
+            <option value="Wetland dense short vegetation">Wetland dense short vegetation</option>
+            <option value="Wetland open tree cover">Wetland open tree cover</option>
+            <option value="Wetland dense tree cover">Wetland dense tree cover</option>
+            <option value="Wetland tree cover gain">Wetland tree cover gain</option>
+            <option value="Wetland tree cover loss, not fire">Wetland tree cover loss, not fire</option>
+        </select>
+    </div>
+
+    <div id="loading">Chargement...</div>
+
+    <div class="container">
+        <div id="map" style="height: 600px;"></div>
+        
+        <div id="pagination" class="d-flex justify-content-center">
+            <!-- Contrôles de pagination seront ajoutés ici -->
+        </div>
+
+        <table id="data-table" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Strata</th>
+                    <th>Pente Moyenne</th>
+                    <th>Variance de la Pente</th>
+                    <th>Altitude Moyenne</th>
+                    <th>Altitude Maximale</th>
+                    <th>Exposition Moyenne</th>
+                    <th>Variance de l'Exposition</th>
+                    <th>Ecart type de l'Exposition</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les données seront insérées ici via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+    
+        $(document).ready(function() {
+            var map = L.map('map').setView([31.7917, -7.0926], 6);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var markers = L.markerClusterGroup();
+            var strata = $('#strata').val();
+            var currentPage = 1;
+            var totalPages = 1;
+
+            var strataColors = {
+                'Dense short vegetation': '#FF0000',    // Orange
+                'Open tree cover': '#004d00',           // Vert foncé
+                'Dense tree cover': '#003300',          // Vert encore plus foncé
+                'Tree cover gain': '#66FF66',           // Vert clair
+                'Tree cover loss, not fire': '#d62728', // Rouge
+                'Wetland sparse vegetation': '#808080', // Gris
+                'Wetland dense short vegetation': '#add8e6', // Bleu clair
+                'Wetland open tree cover': '#00FFFF',   // Cyan
+                'Wetland dense tree cover': '#8c564b',  // Marron
+                'Wetland tree cover gain': '#e377c2',   // Rose
+                'Wetland tree cover loss, not fire': '#FF0000' // Rouge
+            };
+
+            function getColor(strataType) {
+                return strataColors[strataType] || '#ffffff'; // Blanc par défaut
+            }
+
+            function loadData(page) {
+                $('#loading').show();
+                $.ajax({
+                    url: '/data',
+                    data: { page: page, strata: strata },
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#loading').hide();
+                        $('#data-table tbody').empty();
+                        markers.clearLayers();
+                        totalPages = Math.ceil(data.total / data.per_page);
+
+                        data.features.forEach(function(feature) {
+                            var properties = feature.properties;
+                            var coords = feature.geometry.coordinates;
+
+                            if (coords && coords.length > 0 && coords[0].length > 0) {
+                                var latLngs = coords[0].map(function(coord) {
+                                    return [coord[1], coord[0]];
+                                });
+
+                                var row = $('<tr>').append(
+                                    $('<td>').text(properties.id),
+                                    $('<td>').text(properties.strata),
+                                    $('<td>').text(properties.pente_mean),
+                                    $('<td>').text(properties.pente_variance),
+                                    $('<td>').text(properties.altitude_mean),
+                                    $('<td>').text(properties.altitude_max),
+                                    $('<td>').text(properties.exposition_mean),
+                                    $('<td>').text(properties.exposition_variance),
+                                    $('<td>').text(properties.exposition_stdev)
+                                );
+                                $('#data-table tbody').append(row);
+
+                                var polygon = L.polygon(latLngs, {
+                                    color: getColor(properties.strata)
+                                }).bindPopup('<b>ID:</b> ' + properties.id +
+                                             '<br><b>Strata:</b> ' + properties.strata +
+                                             '<br><b>Pente Moyenne:</b> ' + properties.pente_mean +
+                                             '<br><b>Variance de la Pente:</b> ' + properties.pente_variance +
+                                             '<br><b>Altitude Moyenne:</b> ' + properties.altitude_mean +
+                                             '<br><b>Altitude Maximale:</b> ' + properties.altitude_max +
+                                             '<br><b>Exposition Moyenne:</b> ' + properties.exposition_mean +
+                                             '<br><b>Variance de l\'Exposition:</b> ' + properties.exposition_variance +
+                                             '<br><b>Ecart type de l\'Exposition:</b> ' + properties.exposition_stdev);
+
+                                markers.addLayer(polygon);
+                            } else {
+                                console.error('Invalid coordinates:', coords);
+                            }
+                        });
+
+                        map.addLayer(markers);
+                        updatePagination();
+                    },
+                    error: function(xhr, status, error) {
+                        $('#loading').hide();
+                        console.error('Erreur de chargement des données:', status, error);
+                    }
+                });
+            }
+
+            function updatePagination() {
+                var paginationHtml = '';
+                var visiblePages = 5;
+                var startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
+                var endPage = Math.min(totalPages, currentPage + Math.floor(visiblePages / 2));
+
+                if (currentPage > 1) {
+                    paginationHtml += '<button id="prev" class="btn btn-light btn-sm">Précédent</button>';
+                }
+
+                if (startPage > 1) {
+                    paginationHtml += '<button class="btn btn-light btn-sm page-btn" data-page="1">1</button>';
+                    if (startPage > 2) {
+                        paginationHtml += '<span>...</span>';
+                    }
+                }
+
+                for (var i = startPage; i <= endPage; i++) {
+                    paginationHtml += '<button class="btn btn-light btn-sm page-btn' + (i === currentPage ? ' active' : '') + '" data-page="' + i + '">' + i + '</button>';
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        paginationHtml += '<span>...</span>';
+                    }
+                    paginationHtml += '<button class="btn btn-light btn-sm page-btn" data-page="' + totalPages + '">' + totalPages + '</button>';
+                }
+
+                if (currentPage < totalPages) {
+                    paginationHtml += '<button id="next" class="btn btn-light btn-sm">Suivant</button>';
+                }
+
+                $('#pagination').html(paginationHtml);
+            }
+
+            $('#strata').on('change', function() {
+                strata = $(this).val();
+                currentPage = 1;
+                loadData(currentPage);
+            });
+
+            $('#pagination').on('click', '.page-btn', function() {
+                currentPage = $(this).data('page');
+                loadData(currentPage);
+            });
+
+            $('#pagination').on('click', '#prev', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadData(currentPage);
+                }
+            });
+
+            $('#pagination').on('click', '#next', function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadData(currentPage);
+                }
+            });
+
+            loadData(currentPage); // Charger les données initialement
+        });
+    </script>
+
+
+
+</body>
+</html>

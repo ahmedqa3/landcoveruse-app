@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ model_summary }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            padding: 40px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        .metrics {
+            margin: 30px 0;
+        }
+
+        .metrics h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .metrics ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .metrics li {
+            padding: 10px 0;
+            font-size: 1.2em;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .metrics li strong {
+            color: #3498db;
+        }
+
+        .graph {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .graph img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ model_summary }}</h1>
+        
+        <div class="metrics">
+            <!-- Titre pour la section Modèle -->
+            <h2>Modèle</h2>
+            <!-- Affichage du graphique -->
+            <div class="graph">
+                {{ graph_html | safe }}
+            </div>
+
+            <!-- Titre pour la section Évaluation des Performances -->
+            <h2>Évaluation des Performances</h2>
+            <ul>
+                <li><strong>Précision (Global) :</strong> {{ accuracy }}</li>
+                <li><strong>Précision (Moyenne Pondérée) :</strong> {{ precision }}</li>
+                <li><strong>Rappel (Moyenne Pondérée) :</strong> {{ recall }}</li>
+                <li><strong>F1-Score (Moyenne Pondérée) :</strong> {{ f1_score }}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
